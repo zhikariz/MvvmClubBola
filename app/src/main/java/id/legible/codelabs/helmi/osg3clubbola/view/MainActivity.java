@@ -39,8 +39,8 @@ public class MainActivity extends AppCompatActivity implements TeamNavigator {
         mTeamViewModel = new TeamViewModel(Injection.provideTeamRepository(this), getApplicationContext());
         dataListTeamBola = new ArrayList<>();
         mTeamViewModel.setNavigator(this);
-        mTeamViewModel.getListTeam();
         initAdapter();
+        mTeamViewModel.getListTeam();
     }
 
     private void initAdapter() {
