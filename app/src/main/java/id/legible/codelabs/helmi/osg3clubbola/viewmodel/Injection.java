@@ -1,4 +1,4 @@
-package id.legible.codelabs.helmi.osg3clubbola;
+package id.legible.codelabs.helmi.osg3clubbola.viewmodel;
 
 import android.content.Context;
 

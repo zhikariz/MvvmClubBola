@@ -1,62 +1,59 @@
 package id.legible.codelabs.helmi.osg3clubbola.adapter;
 
 import android.content.Context;
+import android.databinding.DataBindingUtil;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.text.Layout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
 
 import java.util.List;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
 import id.legible.codelabs.helmi.osg3clubbola.R;
+import id.legible.codelabs.helmi.osg3clubbola.databinding.ItemRowBinding;
 import id.legible.codelabs.helmi.osg3clubbola.model.TeamDetail;
 
-public class TeamBolaAdapter extends RecyclerView.Adapter<TeamBolaAdapter.MyHolder> {
+public class TeamBolaAdapter extends RecyclerView.Adapter<TeamBolaAdapter.TeamBolaHolder> {
 
-    private Context context;
-    private List<TeamDetail> teamDetails;
+    private List<TeamDetail> listKubBola;
+    private LayoutInflater layoutInflater;
 
-    public TeamBolaAdapter(Context context, List<TeamDetail> teamDetails) {
-        this.context = context;
-        this.teamDetails = teamDetails;
+    public TeamBolaAdapter(List<TeamDetail> listKlubBola) {
+        this.listKubBola = listKlubBola;
     }
 
     @NonNull
     @Override
-    public MyHolder onCreateViewHolder(@NonNull ViewGroup parent, int i) {
-        View layout = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_row, parent, false);
-        MyHolder holder = new MyHolder(layout);
-        return holder;
+    public TeamBolaHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
+        if(layoutInflater == null) {
+            layoutInflater = LayoutInflater.from(viewGroup.getContext());
+        }
+        ItemRowBinding binding = DataBindingUtil.inflate(layoutInflater, R.layout.item_row, viewGroup, false);
+        return new TeamBolaHolder(binding);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull MyHolder holder, int position) {
-        Glide.with(context).load(teamDetails.get(position).teamLogo).into(holder.ivLogo);
-        holder.tvClub.setText(teamDetails.get(position).teamName);
+    public void onBindViewHolder(@NonNull final TeamBolaHolder klubBolaHolder, final int i) {
+        klubBolaHolder.binding.setTeamDetailVM(listKubBola.get(i));
     }
 
     @Override
     public int getItemCount() {
-        return teamDetails.size();
+        return listKubBola.size();
     }
 
-    public class MyHolder extends RecyclerView.ViewHolder {
+    class TeamBolaHolder extends RecyclerView.ViewHolder {
 
-        @BindView(R.id.iv_logo)
-        ImageView ivLogo;
-        @BindView(R.id.tv_club)
-        TextView tvClub;
+        private final ItemRowBinding binding;
 
-        public MyHolder(@NonNull View itemView) {
-            super(itemView);
-            ButterKnife.bind(this, itemView);
+        TeamBolaHolder(@NonNull ItemRowBinding itemRowBinding) {
+            super(itemRowBinding.getRoot());
+            this.binding = itemRowBinding;
         }
     }
 }

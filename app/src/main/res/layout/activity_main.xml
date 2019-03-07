@@ -1,19 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:padding="16dp"
-    android:orientation="vertical"
+    android:background="#CCCACA"
     tools:context=".view.MainActivity">
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/recycler_team_bola"
+    <data>
+        <variable
+            name="vm"
+            type="id.legible.codelabs.helmi.osg3clubbola.viewmodel.TeamViewModel"/>
+    </data>
+
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        tools:listitem="@layout/item_row">
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="16dp">
 
-    </android.support.v7.widget.RecyclerView>
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recycler_team_bola"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:listitem="@layout/item_row">
 
-</LinearLayout>
+        </android.support.v7.widget.RecyclerView>
+
+    </LinearLayout>
+
+</layout>
