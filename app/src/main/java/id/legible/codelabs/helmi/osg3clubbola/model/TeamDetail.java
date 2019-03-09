@@ -11,10 +11,12 @@ import android.widget.ImageView;
 import com.google.gson.annotations.SerializedName;
 import com.squareup.picasso.Picasso;
 
+import java.io.Serializable;
+
 import id.legible.codelabs.helmi.osg3clubbola.BR;
 
 @Entity(tableName = "team")
-public class TeamDetail extends BaseObservable {
+public class TeamDetail extends BaseObservable implements Serializable {
 
     @PrimaryKey(autoGenerate = true)
     public int mId;
@@ -26,6 +28,10 @@ public class TeamDetail extends BaseObservable {
     @ColumnInfo(name = "team_logo")
     @SerializedName("strTeamBadge")
     public String teamLogo;
+
+    @ColumnInfo(name = "team_description")
+    @SerializedName("strStadiumDescription")
+    public String teamDescription;
 
     public TeamDetail(int mId, String teamName, String teamLogo) {
         this.mId = mId;
@@ -43,6 +49,10 @@ public class TeamDetail extends BaseObservable {
     @Bindable
     public String getTeamLogo() {
         return teamLogo;
+    }
+    @Bindable
+    public String getTeamDescription() {
+        return teamDescription;
     }
 
     public void setmId(int mId) {
